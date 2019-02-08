@@ -62,15 +62,10 @@ def precipitation():
   filter(Measurement.date >= year_ago).all()
 
   # Create dictionary from the results data and append to a list
-  date_prcp = []
+  prcp_dict = {}
   for measurement in results:
-      prcp_dict = {}
-      prcp_dict["date"] = measurement.date
-      prcp_dict["prcp"] = measurement.prcp
-     
-      date_prcp.append(prcp_dict)
-
-  return jsonify(date_prcp)
+      prcp_dict[f"{measurement.date}"] = measurement.prcp
+  return jsonify(prcp_dict)
 
 # Stations route
 @app.route("/api/v1.0/stations")
